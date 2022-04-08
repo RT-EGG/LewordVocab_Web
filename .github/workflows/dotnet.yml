@@ -1,0 +1,25 @@
+name: BlazorNetlifySample #任意の名称を指定
+on: [push] #push時に実行
+
+jobs:
+  build:
+    runs-on: ubuntu-latest #最新のubuntu環境をビルドに使用。(バージョンを固定したほうが良いかも)
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.100 #ビルドに用いる.NETバージョン(2020/12/08時点での最新SDK ver)
+    - name: Build with dotnet
+      run: dotnet build --configuration Release
+    - name: Publish Blazor webassembly using dotnet 
+      #distディレクトリにpublish
+      run: dotnet publish -c Release --no-build -o dist
+    - name: Publish generated Blazor webassembly to Netlify
+      uses: netlify/actions/cli@master #uses Netlify Cli actions
+      env: # Netlifyの設定を環境変数として定義
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      with:
+          args: deploy --dir=dist/wwwroot --prod #dist/wwwrootディレクトリをデプロイ
+          secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]' 
