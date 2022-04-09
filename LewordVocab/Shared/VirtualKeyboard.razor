@@ -1,0 +1,25 @@
+﻿<div class="keyboard">
+    <div class="row">
+        @foreach (char key in "qwertyuiop") {
+            <button class="key">@key</button>
+        }
+    </div>
+    <div class="row">
+        <div class="spacer-half"/>
+        @foreach (char key in "asdfghjkl") {
+            <button class="key">@key</button>
+        }
+        <div class="spacer-half"/>
+    </div>
+    <div class="row">
+        <div class="spacer-one-and-half"/>
+        @foreach (char key in "zxcvbnm") {
+            <button class="key">@key</button>
+        }
+        <div class="spacer-one-and-half"/>
+    </div>
+
+</div>
+
+@code {
+}

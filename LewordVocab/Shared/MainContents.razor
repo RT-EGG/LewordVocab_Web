@@ -1,0 +1,14 @@
+﻿
+<div class="main-content">
+    文字数&nbsp;<input type="number" @bind="@WordLength" min="1" max="10"/>
+    <WordLetterInputBoxes @ref="LetterInputBoxes" BoxCount="@WordLength"/>
+
+    <VirtualKeyboard/>
+</div>
+
+@code {
+    private WordLetterInputBoxes LetterInputBoxes = null;
+
+    int WordLength
+    { get; set; } = 5;
+}
