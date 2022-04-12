@@ -1,0 +1,14 @@
+﻿@{ 
+    int fontSize = (int)(Height * 0.8);
+    string style = $"height:{Height}px;font-size:{fontSize}px;";
+}
+<div class="panel"
+     letter-state="@LetterState.StateString()" 
+     selected="@Selected.ToString()" style=@style
+     @onclick="PanelClick">
+    @Letter
+</div>
+
+@code {
+
+}

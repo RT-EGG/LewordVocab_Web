@@ -1,0 +1,42 @@
+﻿button {
+    writing-mode: horizontal-tb !important;
+    font-family: inherit;
+    font-weight: bold;
+    text-rendering: auto;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-indent: 0px;
+    text-shadow: none;
+    text-align: center;
+    box-sizing: border-box;
+    border: 0;
+    padding: 0;
+    margin: 0 6px 0 0;
+    height: 58px;
+    border-radius: 4px;
+    cursor: pointer;
+    user-select: none;
+    color: #000000;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    -webkit-tap-highlight-color: rgba(0,0,0,0.3);
+}
+
+button[letter-state='unknown'] {
+    background-color: #d3d6da;
+}
+
+button[letter-state='absent'] {
+    background-color: #787C7E;
+}
+
+button[letter-state='present'] {
+    background-color: #C9B458;
+}
+
+button[letter-state='correct'] {
+    background-color: #6AAA64;
+}

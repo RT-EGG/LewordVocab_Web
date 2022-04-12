@@ -1,14 +1,19 @@
 ﻿
 <div class="main-content">
-    文字数&nbsp;<input type="number" @bind="@WordLength" min="1" max="10"/>
-    <WordLetterInputBoxes @ref="LetterInputBoxes" BoxCount="@WordLength"/>
+    <div class="search-bar">
+        <div>
+            文字数&nbsp;<input type="number" @bind="@WordLength" min="1" max="10" />
+        </div>
+        <div class="board-container">
+            <WordLetterPanels @ref="WordLetterPanels" PanelCount="@WordLength"
+                              MaxWidth="350" MaxHeight="75"
+                              OnLetterPanelClick="WordLetterPanelClicked"/>
+        </div>
+    </div>
 
-    <VirtualKeyboard/>
+    <VirtualKeyboard @ref="@Keyboard" OnClickKey="KeyboardKeyClicked"/>
 </div>
 
 @code {
-    private WordLetterInputBoxes LetterInputBoxes = null;
 
-    int WordLength
-    { get; set; } = 5;
 }

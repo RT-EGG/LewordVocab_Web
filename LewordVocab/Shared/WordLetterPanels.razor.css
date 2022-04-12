@@ -1,0 +1,7 @@
+﻿.board {
+    display: flex;
+    grid-gap: 5px;
+    height: 80px;
+    align-items: center;
+    justify-content: center;
+}

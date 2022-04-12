@@ -1,0 +1,30 @@
+﻿.panel {
+    aspect-ratio: 1;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 2rem;
+    font-weight: bold;
+    vertical-align: middle;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    user-select: none;
+}
+
+.panel[selected='true'] {
+    border: 2px solid #FF0000;
+    background-color: #00FFFF;
+}
+
+.panel[letter-state='absent'] {
+    background-color: #787C7E;
+}
+
+.panel[letter-state='present'] {
+    background-color: #C9B458;
+}
+
+.panel[letter-state='correct'] {
+    background-color: #6AAA64;
+}

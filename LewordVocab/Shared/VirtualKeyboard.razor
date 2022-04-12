@@ -1,25 +1,25 @@
 ﻿<div class="keyboard">
     <div class="row">
-        @foreach (char key in "qwertyuiop") {
-            <button class="key">@key</button>
+        @foreach (char letter in "qwertyuiop") {
+            <VirtualKeyboardKey Parent="@this" Letter="@letter" OnClick="ClickKey" />
         }
     </div>
     <div class="row">
         <div class="spacer-half"/>
-        @foreach (char key in "asdfghjkl") {
-            <button class="key">@key</button>
+        @foreach (char letter in "asdfghjkl") {
+            <VirtualKeyboardKey Parent="@this" Letter="@letter" OnClick="ClickKey" />
         }
         <div class="spacer-half"/>
     </div>
     <div class="row">
-        <div class="spacer-one-and-half"/>
-        @foreach (char key in "zxcvbnm") {
-            <button class="key">@key</button>
+        <VirtualKeyboardEnterKey Parent="@this" OnClick="ClickKey" />
+        @foreach (char letter in "zxcvbnm") {
+            <VirtualKeyboardKey Parent="@this" Letter="@letter" OnClick="ClickKey" />
         }
-        <div class="spacer-one-and-half"/>
+        <VirtualKeyboardDeleteKey Parent="@this" OnClick="ClickKey" />
     </div>
-
 </div>
 
 @code {
+    
 }

@@ -1,0 +1,12 @@
+﻿
+<div class="board">
+    @for (int i = 0; i < PanelCount; ++i) {
+        int height = (350 - (5 * PanelCount)) / PanelCount;
+        height = Math.Min(height, MaxHeight);
+
+        <WordLetterPanel Parent="@this" Index="@i" Height="@height" OnClick="@LetterPanelClick" />
+    }
+</div>
+
+@code {
+}
