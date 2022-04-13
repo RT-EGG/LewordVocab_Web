@@ -34,7 +34,11 @@ namespace LewordVocab.Shared
             get => Panels.Length;
             set {
                 if (value != PanelCount) {
-                    Panels = new WordLetterPanel[value];
+                    WordLetterPanel[] newPanels = new WordLetterPanel[value];
+                    for (int i = 0; i < Math.Min(value, Panels.Length); ++i) {
+                        newPanels[i] = Panels[i];
+                    }
+                    Panels = newPanels;
                     StateHasChanged();
                 }
             }
