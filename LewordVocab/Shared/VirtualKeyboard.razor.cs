@@ -21,7 +21,10 @@ namespace LewordVocab.Shared
         { get; set; } = EventCallback<VirtualKeyboardKey>.Empty;
 
         public VirtualKeyboardKey GetKey(char inLetter)
-            => Keys.FirstOrDefault(k => k.Letter == inLetter);
+        {
+            char lower = new string(inLetter, 1).ToLower().First();
+            return Keys.FirstOrDefault(k => k.Letter == lower);
+        }
 
         internal void AddChild(VirtualKeyboardKey inKey)
             => Keys.Add(inKey);

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LewordVocab.Shared
@@ -78,8 +79,35 @@ namespace LewordVocab.Shared
             await Task.Yield();
         }
 
+        private void UpdateKeyboardState()
+        {
+            string word = "";
+            for (int i = 0; i < Math.Min(WordLength, WordLetterPanels.PanelCount); ++i) {
+                word += WordLetterPanels[i].Letter;
+            }
+            word = word.ToUpper();
+
+            foreach (char letter in UpperLetters) {
+                var key = Keyboard.GetKey(letter);
+                if (key.LetterState == LetterState.Correct) {
+                    if (!word.Contains(letter)) {
+                        key.LetterState = LetterState.Unknown;
+                    }
+                }
+            }
+        }
+
         private int WordLength
-        { get; set; } = 5;
+        {
+            get => m_WordLength;
+            set {
+                if (m_WordLength != value) {
+                    m_WordLength = value;
+                    UpdateKeyboardState();
+                }
+            }
+        }
+        
         private WordLetterPanels WordLetterPanels
         { get; set; } = null;
         private VirtualKeyboard Keyboard
@@ -87,5 +115,9 @@ namespace LewordVocab.Shared
 
         private WordLetterPanel CurrentPanel
         { get; set; } = null;
+
+        private int m_WordLength = 5;
+
+        private const string UpperLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     }
 }
