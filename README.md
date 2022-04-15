@@ -9,7 +9,7 @@ wordle向け(に限りませんが)英単語のルックアップツールです
 アプリページ<br>
 https://rt-egg-leword-vocab-net.netlify.app/
 
-![](.img/behaviour.gif)
+![](https://github.com/RT-EGG/LewordVocab_Web/blob/main/img/behaviour.gif)
 
 ## 開発環境
 フレームワーク：ASP.NET Core blazor
