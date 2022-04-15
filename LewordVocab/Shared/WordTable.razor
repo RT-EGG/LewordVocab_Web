@@ -1,0 +1,17 @@
+﻿@if (Items != null) {
+<div class="table-container">
+    <table rules="rows">
+        @foreach (WordDictionaryItem item in Items) {
+            <tr>
+                <td><b>@item.Word</b></td>
+                <td>@item.Mean</td>
+            </tr>
+        }
+    </table>
+        
+</div>
+}
+
+@code {
+
+}

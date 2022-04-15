@@ -4,6 +4,7 @@
 
 .keyboard {
     display: block;
+    width: 100%;
 }
 
 .row {

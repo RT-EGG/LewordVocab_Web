@@ -76,7 +76,31 @@ namespace LewordVocab.Shared
 
         private async Task ExecuteSearch()
         {
-            await Task.Yield();
+            string corrects = "";
+            for (int i = 0; i < WordLength; ++i) {
+                if (WordLetterPanels[i].Letter == ' ') {
+                    corrects += '*';
+                } else {
+                    corrects += WordLetterPanels[i].Letter;
+                }
+            }
+
+            string presents = "";
+            string absents = "";
+            foreach (char letter in LowerLetters) {
+                VirtualKeyboardKey key = Keyboard.GetKey(letter);
+                switch (key.LetterState) {
+                    case LetterState.Present:
+                        presents += key.Letter;
+                        break;
+                    case LetterState.Absent:
+                        absents += key.Letter;
+                        break;
+                }
+            }
+
+            var words = await WordDictionary.Search(corrects, presents, absents);
+            WordTable.Items = words;
         }
 
         private void UpdateKeyboardState()
@@ -87,7 +111,7 @@ namespace LewordVocab.Shared
             }
             word = word.ToUpper();
 
-            foreach (char letter in UpperLetters) {
+            foreach (char letter in LowerLetters) {
                 var key = Keyboard.GetKey(letter);
                 if (key.LetterState == LetterState.Correct) {
                     if (!word.Contains(letter)) {
@@ -95,6 +119,15 @@ namespace LewordVocab.Shared
                     }
                 }
             }
+        }
+
+        protected override async Task OnInitializedAsync()
+        {
+            await base.OnInitializedAsync();
+
+            string srcFilepath= "sample-data/ejdict-hand-utf8.txt";
+            string file = await HttpClient.GetStringAsync(srcFilepath);
+            WordDictionary = await WordDictionaryLoader.LoadData(file);
         }
 
         private int WordLength
@@ -107,10 +140,15 @@ namespace LewordVocab.Shared
                 }
             }
         }
+
+        private WordDictionary WordDictionary
+        { get; set; } = null;
         
         private WordLetterPanels WordLetterPanels
         { get; set; } = null;
         private VirtualKeyboard Keyboard
+        { get; set; } = null;
+        private WordTable WordTable
         { get; set; } = null;
 
         private WordLetterPanel CurrentPanel
@@ -118,6 +156,6 @@ namespace LewordVocab.Shared
 
         private int m_WordLength = 5;
 
-        private const string UpperLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private const string LowerLetters = "abcdefghijklmnopqrstuvwxyz";
     }
 }

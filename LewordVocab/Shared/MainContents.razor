@@ -1,4 +1,5 @@
-﻿
+﻿@inject HttpClient HttpClient
+
 <div class="main-content">
     <div class="search-bar">
         <div>
@@ -21,6 +22,7 @@
     </div>
 
     <VirtualKeyboard @ref="@Keyboard" OnClickKey="KeyboardKeyClicked"/>
+    <WordTable @ref="WordTable"/>
 </div>
 
 @code {
